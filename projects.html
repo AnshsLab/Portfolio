@@ -178,6 +178,48 @@
             font-size: 1.2em;
         }
         
+        /* Navigation Bar Styles */
+        .projects-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 15;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .projects-nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .projects-nav a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .projects-nav a.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
         .scroll-hint {
             position: fixed;
             bottom: clamp(20px, 4vw, 40px);
@@ -207,15 +249,46 @@
         
         /* Mobile Portrait */
         @media (max-width: 768px) and (orientation: portrait) {
+            .projects-nav {
+                padding: 0.8rem 1rem;
+                gap: 0.5rem;
+            }
+            
+            .projects-nav a {
+                font-size: 0.65rem;
+                padding: 0.4rem 0.7rem;
+                letter-spacing: 0.5px;
+            }
+            
             .slide-content {
                 top: auto;
                 bottom: 10%;
                 left: 5%;
                 right: 5%;
                 width: auto;
-                max-height: 50vh;
+                max-height: 55vh;
                 overflow-y: auto;
+                overflow-x: hidden;
                 padding: 1.5rem;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .slide-content::-webkit-scrollbar {
+                width: 4px;
+            }
+            
+            .slide-content::-webkit-scrollbar-track {
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+            }
+            
+            .slide-content::-webkit-scrollbar-thumb {
+                background: rgba(255, 255, 255, 0.4);
+                border-radius: 10px;
+            }
+            
+            .slide-content::-webkit-scrollbar-thumb:hover {
+                background: rgba(255, 255, 255, 0.6);
             }
             
             h1 {
@@ -280,6 +353,24 @@
                 left: 3%;
                 right: 3%;
                 padding: 1.2rem;
+                max-height: 60vh;
+                overflow-y: auto;
+                overflow-x: hidden;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .slide-content::-webkit-scrollbar {
+                width: 3px;
+            }
+            
+            .slide-content::-webkit-scrollbar-track {
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+            }
+            
+            .slide-content::-webkit-scrollbar-thumb {
+                background: rgba(255, 255, 255, 0.4);
+                border-radius: 10px;
             }
             
             h1 {
@@ -306,6 +397,19 @@
     <div class="page-transition-overlay" style="opacity: 1;"></div>
     
     <div class="logo">MY PROJECTS</div>
+    
+    <!-- Navigation Bar -->
+    <nav class="projects-nav">
+        <a href="projects.html" class="active">Projects</a>
+        <a href="opensource.html">Open Source</a>
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="experience.html">Experience</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+        <a href="resume.html">Resume</a>
+        <a href="talk.html">The Lab</a>
+    </nav>
     
     <!-- Back to Home Button -->
     <a href="index.html" class="back-home" id="backHome">
@@ -500,7 +604,8 @@
                     overlay.style.pointerEvents = 'all';
                     overlay.style.opacity = '1';
                     setTimeout(() => {
-                        window.location.href = 'index.html';
+                        // Navigate to index.html with hash to trigger grid display
+                        window.location.href = 'index.html#grid';
                     }, 500);
                 });
             }
