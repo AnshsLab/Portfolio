@@ -352,6 +352,7 @@ function initNavigationItems() {
   });
 }
 
+
 function init() {
   // Create initial transition overlay
   const overlay = createPageTransition();

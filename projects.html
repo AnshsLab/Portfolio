@@ -35,7 +35,6 @@
             z-index: 1;
             cursor: grab;
         }
-
         #canvas-container:active {
             cursor: grabbing;
         }
@@ -156,7 +155,6 @@
             font-style: italic;
             color: #fff;
         }
-
         .github-link {
             display: inline-flex;
             align-items: center;
@@ -171,13 +169,11 @@
             font-size: clamp(0.8rem, 1.5vw, 0.9rem);
             transition: all 0.3s ease;
         }
-
         .github-link:hover {
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.4);
             transform: translateY(-2px);
         }
-
         .github-link i {
             font-size: 1.2em;
         }
@@ -192,7 +188,6 @@
             color: #888;
             z-index: 10;
         }
-
         .click-hint {
             position: fixed;
             bottom: clamp(20px, 4vw, 40px);
@@ -204,7 +199,6 @@
             z-index: 10;
             text-align: right;
         }
-
         .click-hint i {
             display: block;
             margin-bottom: 5px;
@@ -236,8 +230,12 @@
             .logo {
                 font-size: 0.75rem;
             }
-
+            
             .click-hint {
+                display: none;
+            }
+            
+            .scroll-hint {
                 display: none;
             }
         }
@@ -291,6 +289,14 @@
             .meta-grid {
                 grid-template-columns: 60px 1fr;
                 row-gap: 0.5rem;
+            }
+            
+            .click-hint {
+                display: none;
+            }
+            
+            .scroll-hint {
+                display: none;
             }
         }
     </style>
@@ -380,7 +386,6 @@
                 View on GitHub
             </a>
         </div>
-
         <!-- Project 5 - COMMENTED OUT - ADD MORE PROJECTS BY UNCOMMENTING AND EDITING -->
         <!--
         <div class="slide-content" id="slide-4">
@@ -400,7 +405,6 @@
             </a>
         </div>
         -->
-
         <!-- Project 6 - TEMPLATE -->
         <!--
         <div class="slide-content" id="slide-5">
@@ -474,7 +478,6 @@
             //     githubUrl: 'https://github.com/yourusername/your-repo'
             // }
         ];
-
         // Page transition on load
         window.addEventListener('DOMContentLoaded', () => {
             const overlay = document.querySelector('.page-transition-overlay');
@@ -619,8 +622,23 @@
             mesh.receiveShadow = true;
             mesh.userData = { clickable: true, githubUrl: project.githubUrl };
             
-            const edges = new THREE.EdgesGeometry(planeGeo);
-            const outline = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0xffffff }));
+            // Create thick black frame
+            const frameThickness = 0.8;
+            const frameDepth = 0.3;
+            const frameGeometry = new THREE.BoxGeometry(
+                CONFIG.pWidth + frameThickness,
+                CONFIG.pHeight + frameThickness,
+                frameDepth
+            );
+            const frameMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0x0a0a0a,
+                metalness: 0.2,
+                roughness: 0.9
+            });
+            const frame = new THREE.Mesh(frameGeometry, frameMaterial);
+            frame.position.z = -frameDepth / 2 - 0.01;
+            frame.castShadow = true;
+            frame.receiveShadow = true;
             
             const shadowGeo = new THREE.PlaneGeometry(CONFIG.pWidth, CONFIG.pHeight);
             const shadowMat = new THREE.MeshBasicMaterial({ 
@@ -636,8 +654,8 @@
             group.add(paintingLight);
             
             group.add(shadow);
+            group.add(frame);
             group.add(mesh);
-            group.add(outline);
             
             galleryGroup.add(group);
             paintingGroups.push(group);
