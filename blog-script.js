@@ -16,9 +16,12 @@ requestAnimationFrame(raf);
 lenis.on('scroll', ScrollTrigger.update);
 // Wait for DOM to load
 window.addEventListener('DOMContentLoaded', () => {
-    
     // Get all sections
     const sections = gsap.utils.toArray('section');
+    
+    // ======================================
+    // IMAGE WIPE ANIMATION
+    // ======================================
     
     // Animate each section's image with wipe effect
     sections.forEach((section, index) => {
@@ -43,7 +46,10 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // Page Transition
+    // ======================================
+    // PAGE TRANSITION
+    // ======================================
+    
     const overlay = document.querySelector('.page-transition-overlay');
     if (overlay) {
         setTimeout(() => {

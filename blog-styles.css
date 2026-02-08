@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Aboreto&display=swap');
+
 /* CSS Variables */
 :root {
     --color-black: hsla(0, 0%, 12%, 100%);
@@ -6,21 +7,25 @@
     --color-white-50: hsla(0, 0%, 50%, 100%);
     --color-purple: hsla(278, 100%, 75%, 100%);
 }
+
 /* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 html {
     font-size: 16px;
 }
+
 body, html {
     margin: 0;
     padding: 0;
     width: 100%;
     min-height: 100%;
 }
+
 body {
     color: #e0e0e0;
     background-color: #0a0a0a;
@@ -28,10 +33,12 @@ body {
     font-size: 1rem;
     overflow-x: hidden;
 }
+
 main {
     margin: 0;
     padding: 0;
 }
+
 /* Logo */
 .logo {
     position: fixed;
@@ -46,7 +53,8 @@ main {
     color: #fff;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
-/* Navigation Bar - MATCHING PROJECTS.HTML STYLE */
+
+/* Navigation Bar */
 .projects-nav {
     position: fixed;
     top: 0;
@@ -63,6 +71,7 @@ main {
     flex-wrap: wrap;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+
 .projects-nav a {
     color: #fff;
     text-decoration: none;
@@ -76,23 +85,28 @@ main {
     border: 1px solid rgba(255, 255, 255, 0.1);
     white-space: nowrap;
 }
+
 .projects-nav a:hover {
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
 }
+
 .projects-nav a.active {
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.4);
 }
+
 .projects-nav a.home-btn {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.2);
 }
+
 .projects-nav a.home-btn:hover {
     background: rgba(255, 255, 255, 0.25);
     border-color: rgba(255, 255, 255, 0.5);
 }
+
 /* Section Styles */
 section {
     display: flex;
@@ -102,22 +116,28 @@ section {
     padding: 24px 48px;
     position: relative;
 }
-section:nth-child(1) {
+
+/* Black shade variations cycling through sections */
+section:nth-child(4n+1) {
     background-color: #1a1a1a;
     z-index: 4;
 }
-section:nth-child(2) {
+
+section:nth-child(4n+2) {
     background-color: #242424;
     z-index: 3;
 }
-section:nth-child(3) {
+
+section:nth-child(4n+3) {
     background-color: #2e2e2e;
     z-index: 2;
 }
-section:nth-child(4) {
+
+section:nth-child(4n+4) {
     background-color: #383838;
     z-index: 1;
 }
+
 section .img-box {
     position: fixed;
     top: 0;
@@ -128,6 +148,7 @@ section .img-box {
     height: 650px;
     z-index: 50;
 }
+
 section img {
     display: block;
     width: 100%;
@@ -136,6 +157,7 @@ section img {
     border-radius: 8px;
     clip-path: inset(0 0 0 0);
 }
+
 .content {
     padding-left: 10%;
     width: 50%;
@@ -147,17 +169,20 @@ section img {
     z-index: 60;
     position: relative;
 }
+
 .content .title {
     font-size: 2.5rem;
     font-weight: bold;
     line-height: 1.2;
     color: #ffffff;
 }
+
 .content .desc {
     font-size: 1.1rem;
     line-height: 1.7;
     color: #d0d0d0;
 }
+
 /* Page Transition Overlay */
 .page-transition-overlay {
     position: fixed;
@@ -171,6 +196,7 @@ section img {
     pointer-events: none;
     transition: opacity 0.5s ease;
 }
+
 /* === RESPONSIVE === */
 @media (max-width: 1024px) {
     section .img-box {
@@ -186,6 +212,7 @@ section img {
         font-size: 1rem;
     }
 }
+
 @media (max-width: 768px) {
     .projects-nav {
         padding: 0.8rem 1rem;
@@ -235,6 +262,7 @@ section img {
         margin-top: 30px;
     }
 }
+
 @media (max-width: 480px) {
     .projects-nav a {
         font-size: 0.55rem;
