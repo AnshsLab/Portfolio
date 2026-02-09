@@ -9,6 +9,167 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Footer Styles */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100vw;
+            height: 0;
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.98) 0%, rgba(0, 0, 0, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 100;
+            overflow: hidden;
+            transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        footer.active {
+            height: 100vh;
+        }
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 2em;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+        }
+        footer.active .footer-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .footer-content h2 {
+            color: #fff;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .social-links {
+            display: flex;
+            gap: clamp(2rem, 5vw, 4rem);
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .social-links a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            color: #fff;
+            text-decoration: none;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-width: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+        .social-links a:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        .social-links a[href^="mailto"]:hover {
+            box-shadow: 0 10px 30px rgba(234, 67, 53, 0.5);
+        }
+        .social-links a[href^="mailto"]:hover i,
+        .social-links a[href^="mailto"]:hover span {
+            color: #EA4335;
+        }
+        .social-links a[href*="linkedin"]:hover {
+            box-shadow: 0 10px 30px rgba(0, 119, 181, 0.5);
+        }
+        .social-links a[href*="linkedin"]:hover i,
+        .social-links a[href*="linkedin"]:hover span {
+            color: #0077B5;
+        }
+        .social-links a[href*="github"]:hover {
+            box-shadow: 0 10px 30px rgba(170, 170, 170, 0.5);
+        }
+        .social-links a[href*="github"]:hover i,
+        .social-links a[href*="github"]:hover span {
+            color: #aaa;
+        }
+        .social-links a[href*="gitlab"]:hover {
+            box-shadow: 0 10px 30px rgba(252, 109, 38, 0.5);
+        }
+        .social-links a[href*="gitlab"]:hover i,
+        .social-links a[href*="gitlab"]:hover span {
+            color: #FC6D26;
+        }
+        .social-links a i {
+            font-size: clamp(2rem, 4vw, 3rem);
+            position: relative;
+            z-index: 1;
+            transition: color 0.2s ease;
+        }
+        .social-links a span {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-family: 'Lato', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+            transition: color 0.2s ease;
+        }
+        .close-footer {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.2s ease;
+        }
+        .close-footer:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            .social-links {
+                gap: 1.5rem;
+            }
+            .social-links a {
+                min-width: 100px;
+                padding: 1.2rem;
+            }
+            .close-footer {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                top: 1.5rem;
+                right: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .social-links {
+                gap: 1rem;
+            }
+            .social-links a {
+                min-width: 80px;
+                padding: 1rem;
+                gap: 0.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Page Transition Overlay -->
@@ -25,16 +186,12 @@
         <a href="skills.html">Skills</a>
         <a href="experience.html">Experience</a>
         <a href="blog.html" class="active">Blog</a>
-        <a href="contact.html">Contact</a>
+        <a href="#" id="contactLink">Contact</a>
         <a href="resume.html">Resume</a>
         <a href="lab.html">The Lab</a>
     </nav>
     
     <main>
-        <!-- ========================================
-             ACTIVE BLOG POSTS (Currently Visible)
-        ======================================== -->
-        
         <section>
             <div class="content">
                 <div class="title">Timeless Aesthetics</div>
@@ -74,149 +231,67 @@
                 <img src="https://images.unsplash.com/photo-1758718036788-de50f9fd2192?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NjE1ODcyNzl8&ixlib=rb-4.1.0&q=80&w=800" alt="">
             </div>
         </section>
-        
-        <!-- ========================================
-             FUTURE BLOG POSTS (Uncomment to Add)
-        ======================================== -->
-        
-        <!-- BLOG POST 5: Innovation Meets Tradition
-        <section>
-            <div class="content">
-                <div class="title">Innovation Meets Tradition</div>
-                <div class="desc">We blend cutting-edge technology with time-honored craftsmanship. Every space is a perfect balance of modern innovation and classic elegance.</div>
-            </div>
-            <div class="img-box">
-                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="Innovation Meets Tradition">
-            </div>
-        </section>
-        -->
-        
-        <!-- BLOG POST 6: Light & Space
-        <section>
-            <div class="content">
-                <div class="title">Light & Space</div>
-                <div class="desc">Natural light transforms environments. We design with precision to maximize brightness, warmth, and the interplay of shadows throughout the day.</div>
-            </div>
-            <div class="img-box">
-                <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="Light & Space">
-            </div>
-        </section>
-        -->
-        
-        <!-- BLOG POST 7: Texture & Depth
-        <section>
-            <div class="content">
-                <div class="title">Texture & Depth</div>
-                <div class="desc">Layers of texture create richness and character. From soft fabrics to raw materials, we curate elements that invite touch and exploration.</div>
-            </div>
-            <div class="img-box">
-                <img src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="Texture & Depth">
-            </div>
-        </section>
-        -->
-        
-        <!-- BLOG POST 8: Minimal & Purposeful
-        <section>
-            <div class="content">
-                <div class="title">Minimal & Purposeful</div>
-                <div class="desc">Less is more when every element has intention. We eliminate clutter and focus on what truly matters, creating serene, functional spaces.</div>
-            </div>
-            <div class="img-box">
-                <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="Minimal & Purposeful">
-            </div>
-        </section>
-        -->
-        
-        <!-- BLOG POST 9: Color Psychology
-        <section>
-            <div class="content">
-                <div class="title">Color Psychology</div>
-                <div class="desc">Colors evoke emotions and set the mood. We carefully select palettes that resonate with your personality and enhance your well-being.</div>
-            </div>
-            <div class="img-box">
-                <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="Color Psychology">
-            </div>
-        </section>
-        -->
-        
-        <!-- BLOG POST 10: Outdoor Connection
-        <section>
-            <div class="content">
-                <div class="title">Outdoor Connection</div>
-                <div class="desc">Bringing the outside in creates harmony with nature. Large windows, natural materials, and biophilic design blur the boundaries beautifully.</div>
-            </div>
-            <div class="img-box">
-                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="Outdoor Connection">
-            </div>
-        </section>
-        -->
-        
-        <!-- BLOG POST 11: Smart Living
-        <section>
-            <div class="content">
-                <div class="title">Smart Living</div>
-                <div class="desc">Technology should enhance, not overwhelm. We integrate smart systems that make daily life effortless while maintaining aesthetic integrity.</div>
-            </div>
-            <div class="img-box">
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="Smart Living">
-            </div>
-        </section>
-        -->
-        
-        <!-- BLOG POST 12: Heritage Restored
-        <section>
-            <div class="content">
-                <div class="title">Heritage Restored</div>
-                <div class="desc">Old buildings have stories to tell. We honor architectural history while breathing new life into spaces that deserve preservation.</div>
-            </div>
-            <div class="img-box">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="Heritage Restored">
-            </div>
-        </section>
-        -->
-        
-        <!-- BLOG POST 13: Urban Oasis
-        <section>
-            <div class="content">
-                <div class="title">Urban Oasis</div>
-                <div class="desc">Even in the busiest cities, we create peaceful retreats. Strategic design transforms compact spaces into sanctuaries of calm and comfort.</div>
-            </div>
-            <div class="img-box">
-                <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="Urban Oasis">
-            </div>
-        </section>
-        -->
-        
-        <!-- BLOG POST 14: Artisan Touch
-        <section>
-            <div class="content">
-                <div class="title">Artisan Touch</div>
-                <div class="desc">Handcrafted details make spaces truly unique. We collaborate with skilled artisans to bring custom, one-of-a-kind elements to every project.</div>
-            </div>
-            <div class="img-box">
-                <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="Artisan Touch">
-            </div>
-        </section>
-        -->
-        
-        <!-- BLOG POST 15: Wellness Spaces
-        <section>
-            <div class="content">
-                <div class="title">Wellness Spaces</div>
-                <div class="desc">Your environment affects your health. We design with wellness in mind, incorporating air quality, ergonomics, and restorative elements.</div>
-            </div>
-            <div class="img-box">
-                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="Wellness Spaces">
-            </div>
-        </section>
-        -->
-        
     </main>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-content">
+            <h2>Get In Touch</h2>
+            <div class="social-links">
+                <a href="mailto:your.email@example.com" target="_blank" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+                <a href="https://linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <a href="https://gitlab.com/yourusername" target="_blank" aria-label="GitLab">
+                    <i class="fab fa-gitlab"></i>
+                    <span>GitLab</span>
+                </a>
+            </div>
+            <button class="close-footer" id="closeFooter">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </footer>
     
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
     <script src="blog-script.js"></script>
+    <script>
+        // Footer functionality
+        const contactLink = document.getElementById('contactLink');
+        const footer = document.getElementById('footer');
+        const closeFooter = document.getElementById('closeFooter');
+
+        contactLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            footer.classList.add('active');
+        });
+
+        closeFooter.addEventListener('click', () => {
+            footer.classList.remove('active');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && footer.classList.contains('active')) {
+                footer.classList.remove('active');
+            }
+        });
+
+        footer.addEventListener('click', (e) => {
+            if (e.target === footer) {
+                footer.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
