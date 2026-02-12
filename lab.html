@@ -263,89 +263,6 @@
             border-color: rgba(255,255,255,0.3);
         }
 
-        /* ── FOOTER ── */
-        footer {
-            position: fixed;
-            bottom: 0; left: 0;
-            width: 100%; height: 0;
-            background: rgba(0,0,0,0.97);
-            backdrop-filter: blur(20px);
-            z-index: 200;
-            overflow: hidden;
-            transition: height 0.4s cubic-bezier(0.4,0,0.2,1);
-        }
-        footer.active { height: 100vh; }
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            padding: 2rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
-        }
-        footer.active .footer-content { opacity: 1; transform: translateY(0); }
-        .footer-content h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem,5vw,3.5rem);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 2rem;
-        }
-        .social-links {
-            display: flex;
-            gap: clamp(1rem,4vw,3.5rem);
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .social-links a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.7rem;
-            color: #fff;
-            text-decoration: none;
-            padding: 1.4rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(255,255,255,0.04);
-            min-width: 110px;
-            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-        }
-        .social-links a:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.3); }
-        .social-links a[href^="mailto"]:hover { box-shadow: 0 10px 30px rgba(234,67,53,0.4); }
-        .social-links a[href^="mailto"]:hover i,
-        .social-links a[href^="mailto"]:hover span { color: #EA4335; }
-        .social-links a[href*="linkedin"]:hover { box-shadow: 0 10px 30px rgba(0,119,181,0.4); }
-        .social-links a[href*="linkedin"]:hover i,
-        .social-links a[href*="linkedin"]:hover span { color: #0077B5; }
-        .social-links a[href*="github"]:hover { box-shadow: 0 10px 30px rgba(170,170,170,0.4); }
-        .social-links a[href*="github"]:hover i,
-        .social-links a[href*="github"]:hover span { color: #aaa; }
-        .social-links a[href*="gitlab"]:hover { box-shadow: 0 10px 30px rgba(252,109,38,0.4); }
-        .social-links a[href*="gitlab"]:hover i,
-        .social-links a[href*="gitlab"]:hover span { color: #FC6D26; }
-        .social-links a i { font-size: clamp(1.8rem,3.5vw,2.8rem); transition: color 0.2s; }
-        .social-links a span { font-size: clamp(0.8rem, 1.5vw, 0.9rem); text-transform: uppercase; letter-spacing: 1px; transition: color 0.2s; }
-        .close-footer {
-            position: absolute;
-            top: 1.8rem; right: 1.8rem;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.18);
-            color: #fff;
-            width: 46px; height: 46px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            transition: all 0.2s;
-        }
-        .close-footer:hover { background: rgba(255,255,255,0.18); transform: rotate(90deg); }
-
         /* ── RESPONSIVE ── */
         
         /* Tablet and smaller - Stack layout but keep image visible */
@@ -520,7 +437,7 @@
     <a href="skills.html">Skills</a>
     <a href="experience.html">Experience</a>
     <a href="blog.html">Blog</a>
-    <a href="#" id="contactLink">Contact</a>
+    <a href="contact.html">Contact</a>
     <a href="resume.html">Resume</a>
     <a href="lab.html" class="active">The Lab</a>
 </nav>
@@ -627,37 +544,7 @@
     </div>
 </div>
 
-<!-- FOOTER -->
-<footer id="footer">
-    <div class="footer-content">
-        <h2>Get In Touch</h2>
-        <div class="social-links">
-            <a href="mailto:your.email@example.com" target="_blank" rel="noopener noreferrer">
-                <i class="fas fa-envelope"></i><span>Email</span>
-            </a>
-            <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-linkedin"></i><span>LinkedIn</span>
-            </a>
-            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-github"></i><span>GitHub</span>
-            </a>
-            <a href="https://gitlab.com/yourusername" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-gitlab"></i><span>GitLab</span>
-            </a>
-        </div>
-        <button class="close-footer" id="closeFooter" aria-label="Close contact panel"><i class="fas fa-times"></i></button>
-    </div>
-</footer>
-
 <script>
-    const contactLink = document.getElementById('contactLink');
-    const footer      = document.getElementById('footer');
-    const closeFooter = document.getElementById('closeFooter');
-    contactLink.addEventListener('click', e => { e.preventDefault(); footer.classList.add('active'); });
-    closeFooter.addEventListener('click', () => footer.classList.remove('active'));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') footer.classList.remove('active'); });
-    footer.addEventListener('click', e => { if (e.target === footer) footer.classList.remove('active'); });
-
     const thumbs  = document.querySelectorAll('.thumb');
     const bigImgs = document.querySelectorAll('.img-wrap img');
     const cards   = document.querySelectorAll('.project-card');
@@ -672,5 +559,3 @@
         });
     });
 </script>
-</body>
-</html>
